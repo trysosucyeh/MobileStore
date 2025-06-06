@@ -1,0 +1,24 @@
+ <!-- Display list of mobiles -->
+ <h1> Online Mobile Store</h1>
+ <br>
+ <br>
+ <div *ngFor="let mobile of mobiles">
+  <h3>{{ mobile.name }} - {{ mobile.model }}</h3>
+  <img [src]="mobile.imageUrl" alt="{{ mobile.name }}" width="100" height="100">
+  <button [disabled]="isInCart(mobile)" (click)="addToCart(mobile)">
+    {{ isInCart(mobile) ? 'In Cart' : 'Add to Cart' }}
+  </button>
+  <button (click)="buyNow(mobile.model)">Buy Now</button>
+</div>
+
+<!-- Cart Section -->
+<div class="cart-section" *ngIf="cart.length > 0">
+  <h2>Your Cart</h2>
+  <ul>
+    <li *ngFor="let item of cart">
+      <img [src]="item.imageUrl" alt="{{ item.name }}" width="50" height="50">
+      {{ item.name }} - {{ item.model }} - ₹{{ item.price }}
+      <button (click)="removeFromCart(item.model)">Remove</button>
+    </li>
+  </ul>
+</div>
